@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package banking;
+
+service AccountService {
+  rpc CreateAccount (CreateAccountRequest) returns (AccountResponse);
+  rpc GetBalance (BalanceRequest) returns (BalanceResponse);
+  rpc UpdateBalance (UpdateBalanceRequest) returns (BalanceResponse);
+}
+
+service TransactionService {
+  rpc Transfer (TransferRequest) returns (TransferResponse);
+}
+
+service NotificationService {
+  rpc SendNotification (NotificationRequest) returns (NotificationResponse);
+}
+
+message CreateAccountRequest {
+  string name = 1;
+  double initial_balance = 2;
+}
+
+message AccountResponse {
+  string account_id = 1;
+  string message = 2;
+}
+
+message BalanceRequest {
+  string account_id = 1;
+}
+
+message BalanceResponse {
+  double balance = 1;
+}
+
+message UpdateBalanceRequest {
+  string account_id = 1;
+  double amount = 2;
+}
+
+message TransferRequest {
+  string from_account = 1;
+  string to_account = 2;
+  double amount = 3;
+}
+
+message TransferResponse {
+  string message = 1;
+}
+
+message NotificationRequest {
+  string message = 1;
+}
+
+message NotificationResponse {
+  string status = 1;
+}
